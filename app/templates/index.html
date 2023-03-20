@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Detection</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        body {
+            background-image: url('/static/images/Background.jpg');
+            background-size: cover;
+            background-color: black;
+            background-blend-mode: normal;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+          <div class="bg-dark" class= col-md-12>
+            <div style="background:transparent !important" class="col-md-12 jumbotron text-center">
+            <h1 style="color:white"; style= "text-align:center">Exoplanet Detection:</h1>
+            <p style="color:white"><em>an exploration of NASA's Kepler planet-finding telescope dataset</em></p>
+            <p style="color:white">
+                <h4 style="color:white">
+                <b style="color:yellow">Project and Data Overview</b>
+                |
+                <a href="/machine-learning" style="color:lightblue"><b>Exoplanet Detection with Machine Learning</b></a>
+                |
+                <a href="/clustering" style="color:lightblue"><b>Planet Clustering</b></a>
+                |
+                <a href="/summary" style="color:lightblue"><b>Summary</b></a>
+                </h4>
+            </p>
+            </div>
+          </div>
+        <div class="row">
+        <p></p>
+        <h3 style="color:orange">Project Overview</h3>
+        <h5 style="color:white">
+        NASA's Kepler planet finding telescope has found thousands upon thousands of objects of interest 
+        by detecting slight dimming in far away stars. Sometimes such dimming indicated the transit of an 
+        exoplanet -- a world beyond our solar system -- in front of its host star. Other times it was nothing 
+        more than noise in the telescope's signal. Confirming the existence of an exoplanet is a painstaking process 
+        -- but could it be automated with machine learning? Doing so would give NASA's researchers more time and 
+        resources to study these far off worlds.
+
+        We at Team_Brute_Force have been exploring NASA's Kepler dataset in order to construct a machine learning
+        algorithm that could tell whether a Kepler Object of Interest (KOI) was more likely to be a true planet
+        or a false positive based on the many columns of data returned by Kepler. We did this by separating the KOI
+        data into two groups -- confirmed planets and false positives -- and then training our algorithm with a neural
+        network to identify patterns that would distinguish the two groups. Our results, as you will see on the 
+        <a href="/machine-learning" style="color:lightblue">'Exoplanet Detection with Machine Learning'</a>
+        were impressive but it remains to be seen if they are useful.
+
+        Our secondary mission was to evaluate the thousands of confirmed planets for habitability. You can see 
+        the results of this analysis in the 'Data Exploration' section below.
+        </p>
+        </h5>
+        </div>
+        <div class="row">
+        <h3 style="color:orange">Data Exploration</h3>
+        <p style="color:white">
+                <label for="distance">Plot all planets within</label>
+                <input type="number" placeholder="200" style="color:black" id="lightYears"/>
+                <b>light years.</b>
+        </p>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div id="plot"></div>
+            </div>
+            <div class="col-md-3">
+                <div id="gauge"></div>
+            </div>
+        </div>
+        
+        <p>
+        <div class="row">
+        <h5 style="color:white">
+        The above chart depicts all the Kepler confirmed exoplanets (when the planets dataset is toggled)
+        and all their host stars (when the star dataset is toggled) within 200 light years. The colors
+        of the planets indicate temperature with white being the coldest at less than 100 degrees kelvin
+        and red being the hottest at over 500 degrees kelvin. Blue (between 200 and 250 kelvin) and green 
+        (between 250 and 300 kelvin) indicate surface temperatures not hostile to life. Our Earth which averages
+        288 degrees kelvin would appear as green. Of course, temperature is not the only factor in habitability.
+        Click on a planet to view it's habitability index. As you can see from the sample, the 
+        vast majority of those nearby exoplanets are too hot to be habitable -- most likely because
+        they orbit very close to their host stars as is indicated by their position on the y-axis. It may be
+        that planets closer to their stars are easier to detect since they would transit more often and thus grant us
+        more chances to observe them. For reference, Neptune travels around the sun once every 165 Earth years while 
+        Mercury achieves the same feat nearly 4 times an Earth year.
+        </p>
+        <p>
+        <div class="row">
+            <div class="col-md-6">
+                <div id="pie"></div>
+            </div>
+            <div class="col-md-6">
+            To find out how many planets in the full dataset were habitable, we created a list of conditions 
+            established by the <a href="https://phl.upr.edu/home" style="color:lightblue">Habitable Exoplanets Catalog</a> at the University of 
+            Puerto Rico and then filtered our datafset by those conditions. We were thus 
+            able to assign a habitability score from 0 to 2 to each of the 2,620 confirmed exoplanets in the Kepler dataset. 
+            A habitability score of 0 meant the planet was uninhabitable with an average temperature of less than 200 Kelvin 
+            and a radius of either smaller than half of Earth's radius or larger than 2.5 earth radii. A habitability score of 
+            1 meant that the planet was potentially habitable under optimistic criteria. That is, the planet could be as cool 
+            as 200 Kelvin or as hot as 330 Kelvin with a radius as small as half that of earth's or as large as 2.5 earth radii. 
+            Finally, the planets with a score of 2 meet more conservative criteria for habitability: they have a radius greater 
+            than .5 earth radii and smaller than 1.6 earth radii. As one would expect, the vast majority of Kepler's
+            confirmed exoplanets scored a 0 on habitability. 39 -- or 1.5% -- of the exoplanets met the optimistic criteria for 
+            habitability while only 10 -- or .4% -- met the conservative criteria. You can see these results visualized in
+            the chart on the left.
+            </div>
+        </div>
+        </p>
+        <p>
+        As for the star dataset, you can see that the appearance of the stars matches their actual appearance:
+        the smaller, cooler red dwarves appear as smaller red markers while the larger, hotter main class stars appear
+        as larger, orange and yellow markers. Note that there are no giant stars in this subset of the data. This may be 
+        because planet transits are harder to observe in larger, brighter stars.
+        </h5>
+        </p>
+        <p>
+            <div class="row">
+                <div id="starPlot"></div>
+            </div>
+        </p>
+        <p>
+        <a href="/machine-learning" style="color:lightblue"><b>Next ==> Exoplanet Detection with Machine Learning</b></a>
+        </p>
+        <p>
+        </p>
+        </div>
+        </div>
+
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="static/js/script.js"></script>
+</body>
+</html>
